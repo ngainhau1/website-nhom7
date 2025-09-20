@@ -151,3 +151,196 @@ footer small{ color:var(--ink-weak); }
   .feature-card{ height:220px; }
   .hero{ min-height:64vh; }
 }
+/* ---------- 10) Food Cards (Thẻ món ăn) ---------- */
+.food-card{
+  background: white;
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.05);
+  cursor: pointer;
+  position: relative;
+  outline: none;
+}
+.food-card:hover,
+.food-card:focus{
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(111,78,55,0.3);
+}
+.food-card:active{
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.food-card__image{
+  position: relative;
+  overflow: hidden;
+  height: 200px;
+}
+.food-card__image img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+.food-card:hover .food-card__image img,
+.food-card:focus .food-card__image img{
+  transform: scale(1.05);
+}
+.food-card__overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(transparent 60%, rgba(0,0,0,0.7));
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+  opacity: 0;
+  transition: var(--transition);
+}
+.food-card:hover .food-card__overlay,
+.food-card:focus .food-card__overlay{
+  opacity: 1;
+}
+.food-card__price{
+  background: var(--brand);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(111,78,55,0.3);
+}
+.food-card__content{
+  padding: 1.5rem;
+}
+.food-card__title{
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+  transition: color var(--transition);
+}
+.food-card:hover .food-card__title,
+.food-card:focus .food-card__title{
+  color: var(--brand);
+}
+.food-card__desc{
+  color: var(--ink-weak);
+  line-height: 1.6;
+  margin-bottom: 0;
+  font-size: 0.95rem;
+}
+.food-card__add-btn{
+  background: var(--brand);
+  color: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(111,78,55,0.3);
+}
+.food-card__add-btn:hover,
+.food-card__add-btn:focus{
+  background: var(--brand-600);
+  transform: scale(1.1);
+}
+.food-card__add-btn:active{
+  transform: scale(0.95);
+}
+
+/* ---------- 11) Menu ---------- */
+.menu-category{
+  margin-bottom: 3rem;
+}
+.menu-category:last-child{
+  margin-bottom: 0;
+}
+.menu-category h3{
+  color: var(--brand);
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 1rem;
+}
+.menu-category h3::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--brand);
+  border-radius: 3px;
+}
+
+/* ---------- 12) Animation cho các phần tử mới xuất hiện ---------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-card,
+.food-card{
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.service-card:nth-child(1){ animation-delay: 0.1s; }
+.service-card:nth-child(2){ animation-delay: 0.2s; }
+.service-card:nth-child(3){ animation-delay: 0.3s; }
+
+.food-card{
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+.food-card:nth-child(1){ animation-delay: 0.1s; }
+.food-card:nth-child(2){ animation-delay: 0.2s; }
+.food-card:nth-child(3){ animation-delay: 0.3s; }
+
+/* ---------- 13) Responsive tinh chỉnh cho services ---------- */
+@media (min-width: 768px){
+  .feature-card{ height:210px; }
+}
+@media (min-width: 992px){
+  .feature-card{ height:220px; }
+  .hero{ min-height:64vh; }
+}
+
+/* ---------- 14) Hiệu ứng ripple cho button ---------- */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+.ripple:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity 1s;
+}
+.ripple:active:after {
+  transform: scale(0, 0);
+  opacity: .2;
+  transition: 0s;
+}
