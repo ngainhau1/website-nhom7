@@ -1,0 +1,153 @@
+/* ---------- 0) Biến & reset cơ bản ---------- */
+:root{
+  --brand: #6f4e37;         /* nâu cà phê */
+  --brand-600:#5c3f2c;
+  --ink:#2f2a26;            /* màu chữ chính */
+  --ink-weak:#6b6460;
+  --bg:#ffffff;
+  --surface:#f6f6f6;
+  --radius:16px;
+}
+
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  color:var(--ink);
+  background:var(--bg);
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img{ max-width:100%; display:block; height:auto; }
+a{ color:var(--brand); text-decoration:none; transition:color .15s ease, opacity .15s ease; }
+a:hover{ color:var(--brand-600); }
+
+/* Focus rõ ràng cho bàn phím */
+:focus-visible{
+  outline: 3px solid rgba(111,78,55,.45);
+  outline-offset: 2px;
+}
+
+/* ---------- 1) Typography ---------- */
+h1,h2,h3,h4,h5,h6{
+  color:#2f241f;
+  font-weight:700;
+  letter-spacing:.2px;
+  margin-top:0;
+}
+.lead{ color:rgba(255,255,255,.85); }
+
+/* ---------- 2) Branding & Buttons ---------- */
+.brand{ color:var(--brand)!important; }
+.brand:hover{ color:var(--brand-600)!important; }
+
+.btn-brand{
+  background:var(--brand);
+  color:#fff;
+  border:0;
+}
+.btn-brand:hover{ filter:brightness(.95); color:#fff; }
+
+/* ---------- 3) Header / Navbar ---------- */
+header .nav{
+  --bs-nav-link-padding-x: 1rem;
+  --bs-nav-link-color: #4a413c;
+  --bs-nav-link-hover-color: var(--brand);
+}
+header .nav-link{
+  font-weight:600;
+  letter-spacing:.2px;
+  border-radius:.5rem;
+}
+header .nav-link.active{
+  color:#fff!important;
+  background:var(--brand);
+}
+
+/* ---------- 4) Hero ---------- */
+/* Nền mặc định toàn khối hero (layer dưới) */
+.hero{
+  min-height:60vh;
+  display:flex; align-items:center;
+  background:
+    linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
+    url('assets/img/hero.jpg') center/cover no-repeat;
+}
+.hero .display-5,
+.hero p{ color:#fff; }
+
+/* Biến thể hero 2 cột có ảnh minh hoạ bên phải */
+.hero-figure img{ object-fit:cover; width:100%; height:100%; }
+.object-cover{ object-fit:cover; width:100%; height:100%; }
+
+/* ---------- 5) Feature Cards (ảnh mờ, chữ nét) ---------- */
+.feature-card{
+  position:relative;
+  height:200px;
+  border:0;
+  border-radius:var(--radius);
+  overflow:hidden;
+  box-shadow:0 12px 28px rgba(0,0,0,.10);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.feature-card::before{
+  /* Ảnh nền qua custom property: --bg:url('...') đặt trong HTML */
+  content:"";
+  position:absolute; inset:0;
+  background-image: var(--bg);
+  background-size:cover; background-position:center;
+  filter: blur(3px) brightness(.85) saturate(1.05);
+  transform: scale(1.06);            /* tránh hở viền khi blur */
+  z-index:0;
+}
+.feature-card::after{
+  /* Lớp che tối giúp tăng tương phản chữ */
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.55) 100%);
+  z-index:1; pointer-events:none;
+}
+.feature-card__body{
+  position:absolute; left:0; right:0; bottom:0;
+  padding:1rem 1.25rem;
+  color:#fff; z-index:2;
+  text-shadow:0 1px 2px rgba(0,0,0,.35);
+}
+.feature-card .card-title{ color:#fff; font-weight:700; }
+.feature-card .card-text{ color:rgba(255,255,255,.95); }
+.feature-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 16px 36px rgba(0,0,0,.16);
+}
+
+/* Vô hiệu các lớp card nền cũ nếu tồn tại */
+.card.bg-cover, .card.bg-dim{ background:none; border:0; }
+.card.bg-dim::before{ display:none; }
+
+/* ---------- 6) Gallery ---------- */
+.gallery-img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:.5rem;
+}
+
+/* ---------- 7) Footer ---------- */
+footer a{ color:inherit; }
+footer small{ color:var(--ink-weak); }
+
+/* ---------- 8) Bề mặt phụ và tiện ích ---------- */
+.bg-soft{ background:var(--surface); }
+.shadow-soft{ box-shadow:0 10px 24px rgba(0,0,0,.08); }
+.rounded-xl{ border-radius:var(--radius); }
+
+/* ---------- 9) Responsive tinh chỉnh ---------- */
+@media (min-width: 768px){
+  .feature-card{ height:210px; }
+}
+@media (min-width: 992px){
+  .feature-card{ height:220px; }
+  .hero{ min-height:64vh; }
+}
